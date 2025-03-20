@@ -9,12 +9,12 @@ Create a simple Task Manager application that runs in the Django. The applicatio
 **✅**  Update tasks.
 **✅**  Save tasks to a file and load.
 
-The Task Data is saved into a CSV file (savedata.csv) using file-handling for easy analysis.
+The Task Data is saved into a JSON/CSV file (savetasksdata.json) using file-handling for easy analysis.
 ## How It Works
 **🔹** First User enter task detail just like (Title, Description, Due-data, Image)
 **🔹** IF Updation required then update this task data.
 **🔹** If delete required then delete this task data.
-**🔹** And the data is saved into a CSV file for further use.
+**🔹** And the data is saved into a JSON/CSV file for further use.
 
 ## Installation & Setup
 ### Requirements:
@@ -24,7 +24,7 @@ Make sure you have the following installed:
 **2.** Install Django
 **3.** Install pillow (for image)
 **4.** Import os
-**5.** Import csv
+**5.** Import csv or Json
 **6.** Import fileresponce
 ### Installation Steps:
  **1. Clone this repository:**
@@ -45,7 +45,7 @@ Make sure you have the following installed:
 🔹 Django
 🔹 File Handling (For File Create/Save/Read)
 🔹 OS
-🔹 csv
+🔹 csv or json
 
 ## Contributing
 Want to improve this project? Feel free to fork the repository and submit a pull request. 
