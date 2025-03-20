@@ -65,18 +65,42 @@ def modifytask(request):
 
 
 def download_tasks(request):
-    file_path = os.path.join(settings.MEDIA_ROOT, "savedata.csv")
+    file_path = os.path.join(settings.MEDIA_ROOT, "savetasksdata.json")
 
     os.makedirs(os.path.dirname(file_path), exist_ok=True)
 
-    with open(file_path, "w", newline='', encoding='utf-8') as f:
-        ff = csv.writer(f)
+    tasks = Task.objects.all()
+
+    tasks_data = [
+        {
+            "ID": task.id,
+            "Title": task.title,
+            "Description": task.description,
+            "Due Date": task.due_date.strftime("%Y-%m-%d") if task.due_date else None,
+            "Status": task.status,
+        }
+        for task in tasks
+    ]
+
+    with open(file_path, "w", encoding="utf-8") as f:
+        json.dump(tasks_data, f, indent=4)
+
+    return FileResponse(open(file_path, "rb"), as_attachment=True, filename="savetasksdata.json")
+
+
+# def download_tasks(request):
+#     file_path = os.path.join(settings.MEDIA_ROOT, "savedata.csv")
+
+#     os.makedirs(os.path.dirname(file_path), exist_ok=True)
+
+#     with open(file_path, "w", newline='', encoding='utf-8') as f:
+#         ff = csv.writer(f)
         
-        ff.writerow(['ID', 'Title', 'Description', 'Due Date', 'Status'])
+#         ff.writerow(['ID', 'Title', 'Description', 'Due Date', 'Status'])
 
-        tasks = Task.objects.all()
+#         tasks = Task.objects.all()
 
-        for task in tasks:
-            ff.writerow([task.id, task.title, task.description, task.due_date, task.status])
+#         for task in tasks:
+#             ff.writerow([task.id, task.title, task.description, task.due_date, task.status])
 
-    return FileResponse(open(file_path, "rb"), as_attachment=True, filename="savedata.csv")
+#     return FileResponse(open(file_path, "rb"), as_attachment=True, filename="savedata.csv")
